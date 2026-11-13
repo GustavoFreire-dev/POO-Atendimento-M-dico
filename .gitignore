@@ -1,0 +1,10 @@
+# CREDENCIAIS PRIVADAS
+db.properties
+**/db.properties
+
+# ARQUIVOS GERADOS
+target/
+
+# CONFIGURACOES LOCAIS
+.idea/
+.vscode/

@@ -1,0 +1,15 @@
+digraph UML {
+ graph [rankdir=TB, bgcolor="white", nodesep=0.45, ranksep=0.8];
+ node [shape=record, fontname="DejaVu Sans", fontsize=10, style=filled, fillcolor="#edf5fc", color="#326b9a"];
+ Usuario [label="{Usuario (abstrata)|- id: int\l- nome: String\l- email: String\l- senha: String\l- criadoEm: LocalDateTime\l|+ getPerfil(): Perfil (abstrato)\l+ getters/setters()\l+ toString(): String\l}"];
+ Medico [label="{Medico|- crm: String\l- especialidade: String\l|+ getPerfil(): Perfil\l+ toString(): String\l}"];
+ Secretaria [label="{Secretaria|+ getPerfil(): Perfil\l}"];
+ Paciente [label="{Paciente|- cpf: String\l- telefone: String\l|+ getPerfil(): Perfil\l+ toString(): String\l}"];
+ Consulta [label="{Consulta|- id: int\l- paciente: Paciente\l- medico: Medico\l- dataHora: LocalDateTime\l- status: StatusConsulta\l- observacoes: String\l|+ getters/setters()\l+ toString(): String\l}"];
+ Perfil [label="{Perfil (enum)|MEDICO\lSECRETARIA\lPACIENTE\l|+ getValor(): String\l+ fromDb(String): Perfil\l}"];
+ StatusConsulta [label="{StatusConsulta (enum)|AGENDADA\lREALIZADA\lCANCELADA\l|+ getValor(): String\l+ fromDb(String): StatusConsulta\l}"];
+ ConexaoBD [label="{ConexaoBD|+ getConnection(): Connection\l}"];
+ Medico -> Usuario [arrowhead=empty]; Secretaria -> Usuario [arrowhead=empty]; Paciente -> Usuario [arrowhead=empty];
+ Consulta -> Medico [label="1 médico", arrowhead=vee]; Consulta -> Paciente [label="1 paciente", arrowhead=vee];
+ Consulta -> StatusConsulta [style=dashed, label="usa"]; Usuario -> Perfil [style=dashed, label="getPerfil()"]; 
+}
